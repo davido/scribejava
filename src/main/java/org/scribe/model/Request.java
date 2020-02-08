@@ -18,7 +18,7 @@ public class Request
   private static final String CONTENT_LENGTH = "Content-Length";
   private static final String CONTENT_TYPE = "Content-Type";
   private static RequestTuner NOOP = new RequestTuner() {
-    @Override public void tune(Request _){}
+    @Override public void tune(Request request){}
   };
   public static final String DEFAULT_CONTENT_TYPE = "application/x-www-form-urlencoded";
 

@@ -30,7 +30,7 @@ public class ServiceBuilder
   public ServiceBuilder()
   {
     this.callback = OAuthConstants.OUT_OF_BAND;
-    this.signatureType = SignatureType.Header;
+    this.signatureType = SignatureType.QUERY_STRING;
     this.debugStream = null;
   }
   

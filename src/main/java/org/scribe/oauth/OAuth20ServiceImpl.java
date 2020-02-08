@@ -1,5 +1,6 @@
 package org.scribe.oauth;
 
+import java.util.Map;
 import org.scribe.builder.api.*;
 import org.scribe.model.*;
 
@@ -58,7 +59,18 @@ public class OAuth20ServiceImpl implements OAuthService
    */
   public void signRequest(Token accessToken, OAuthRequest request)
   {
-    request.addQuerystringParameter(OAuthConstants.ACCESS_TOKEN, accessToken.getToken());
+    switch (config.getSignatureType())
+    {
+      case BEARER_SIGNATURE_AUTHORIZATION_REQUEST_HEADER_FIELD:
+        request.addHeader(OAuthConstants.HEADER, OAuthConstants.BEARER + accessToken.getToken());
+        break;
+      case QUERY_STRING:
+        request.addQuerystringParameter(OAuthConstants.ACCESS_TOKEN, accessToken.getToken());
+        break;
+      case HEADER:
+      default:
+        throw new IllegalArgumentException("Non supported signature type: " + config.getSignatureType());
+    }
   }
 
   /**
