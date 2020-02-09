@@ -21,6 +21,7 @@ public class ServiceBuilder
   private String callback;
   private Api api;
   private String scope;
+  private ClientAuthenticationScheme clientAuthScheme;
   private SignatureType signatureType;
   private OutputStream debugStream;
   
@@ -31,6 +32,7 @@ public class ServiceBuilder
   {
     this.callback = OAuthConstants.OUT_OF_BAND;
     this.signatureType = SignatureType.QUERY_STRING;
+    this.clientAuthScheme = ClientAuthenticationScheme.REQUEST_PARAMETER;
     this.debugStream = null;
   }
   
@@ -129,6 +131,19 @@ public class ServiceBuilder
   }
 
   /**
+   * Configures the clientauth scheme, choose between request parameter and basic auth.
+   *
+   * @param scheme The client auth scheme
+   * @return the {@link ServiceBuilder} instance for method chaining
+   */
+  public ServiceBuilder clientAuthenticationScheme(ClientAuthenticationScheme scheme)
+  {
+    Preconditions.checkNotNull(scheme, "ClientAuthenticationScheme type can't be null");
+    this.clientAuthScheme = scheme;
+    return this;
+  }
+
+  /**
    * Configures the signature type, choose between header, querystring, etc. Defaults to Header
    *
    * @param scope The OAuth scope
@@ -164,6 +179,6 @@ public class ServiceBuilder
     Preconditions.checkNotNull(api, "You must specify a valid api through the provider() method");
     Preconditions.checkEmptyString(apiKey, "You must provide an api key");
     Preconditions.checkEmptyString(apiSecret, "You must provide an api secret");
-    return api.createService(new OAuthConfig(apiKey, apiSecret, callback, signatureType, scope, debugStream));
+    return api.createService(new OAuthConfig(apiKey, apiSecret, callback, clientAuthScheme, signatureType, scope, debugStream));
   }
 }
