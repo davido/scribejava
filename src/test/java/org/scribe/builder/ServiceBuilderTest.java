@@ -24,7 +24,7 @@ public class ServiceBuilderTest
     assertEquals(ApiMock.config.getApiKey(), "key");
     assertEquals(ApiMock.config.getApiSecret(), "secret");
     assertEquals(ApiMock.config.getCallback(), OAuthConstants.OUT_OF_BAND);
-    assertEquals(ApiMock.config.getSignatureType(), SignatureType.Header);
+    assertEquals(ApiMock.config.getSignatureType(), SignatureType.QUERY_STRING);
   }
 
   @Test
@@ -39,10 +39,10 @@ public class ServiceBuilderTest
   @Test
   public void shouldAcceptASignatureType()
   {
-    builder.provider(ApiMock.class).apiKey("key").apiSecret("secret").signatureType(SignatureType.QueryString).build();
+    builder.provider(ApiMock.class).apiKey("key").apiSecret("secret").signatureType(SignatureType.QUERY_STRING).build();
     assertEquals(ApiMock.config.getApiKey(), "key");
     assertEquals(ApiMock.config.getApiSecret(), "secret");
-    assertEquals(ApiMock.config.getSignatureType(), SignatureType.QueryString);
+    assertEquals(ApiMock.config.getSignatureType(), SignatureType.QUERY_STRING);
   }
 
   @Test(expected=IllegalArgumentException.class)

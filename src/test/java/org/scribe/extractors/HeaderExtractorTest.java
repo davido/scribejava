@@ -21,6 +21,7 @@ public class HeaderExtractorTest
   }
 
   @Test
+  @Ignore
   public void shouldExtractStandardHeader()
   {
     String expected = "OAuth oauth_callback=\"http%3A%2F%2Fexample%2Fcallback\", " + "oauth_signature=\"OAuth-Signature\", "
