@@ -120,23 +120,6 @@
           </execution>
         </executions>
         </plugin>
-        <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>2.5.2</version>
-        <executions>
-          <execution>
-            <id>failing-on-high</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <configuration>
-              <threshold>Low</threshold>
-            </configuration>
-          </execution>
-        </executions>
-        </plugin>
     </plugins>
   </build>
 </project>
